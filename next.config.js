@@ -9,5 +9,18 @@ module.exports = {
         // pathname: '/account123/**',
       },
     ],
+    async headers() {
+      return [
+        {
+          source: "/_next/:path*",
+          headers: [
+            {
+              key: "Access-Control-Allow-Origin",
+              value: "http://hn.algolia.com/api/v1/",
+            },
+          ],
+        },
+      ];
+    },
   },
 };
