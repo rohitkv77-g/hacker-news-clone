@@ -26,7 +26,7 @@ const Search = () => {
     if (searchBy === "popularity") {
       if (searchOf === "all")
         setUrl(
-          `http://hn.algolia.com/api/v1/search?query=${searchValue}&page=${page}${
+          `https://hn.algolia.com/api/v1/search?query=${searchValue}&page=${page}${
             searchFor === "0"
               ? ""
               : `&numericFilters=created_at_i>${getTimestamp(searchFor)}`
@@ -34,7 +34,7 @@ const Search = () => {
         );
       else
         setUrl(
-          `http://hn.algolia.com/api/v1/search?query=${searchValue}&tags=${searchOf}&page=${page}${
+          `https://hn.algolia.com/api/v1/search?query=${searchValue}&tags=${searchOf}&page=${page}${
             searchFor === "0"
               ? ""
               : `&numericFilters=created_at_i>${getTimestamp(searchFor)}`
@@ -43,7 +43,7 @@ const Search = () => {
     } else {
       if (searchOf === "all")
         setUrl(
-          `http://hn.algolia.com/api/v1/search_by_date?query=${searchValue}&page=${page}${
+          `https://hn.algolia.com/api/v1/search_by_date?query=${searchValue}&page=${page}${
             searchFor === "0"
               ? ""
               : `&numericFilters=created_at_i>${getTimestamp(searchFor)}`
@@ -51,7 +51,7 @@ const Search = () => {
         );
       else
         setUrl(
-          `http://hn.algolia.com/api/v1/search_by_date?query=${searchValue}&tags=${searchOf}&page=${page}${
+          `https://hn.algolia.com/api/v1/search_by_date?query=${searchValue}&tags=${searchOf}&page=${page}${
             searchFor === "0"
               ? ""
               : `&numericFilters=created_at_i>${getTimestamp(searchFor)}`
