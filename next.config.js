@@ -16,7 +16,7 @@ module.exports = {
           headers: [
             {
               key: "Access-Control-Allow-Origin",
-              value: "http://hn.algolia.com/api/v1/",
+              value: "http://hn.algolia.com/api/v1/*",
             },
           ],
         },
