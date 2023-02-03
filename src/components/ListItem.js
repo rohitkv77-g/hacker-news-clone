@@ -1,5 +1,3 @@
-import styles from "@/styles/newest.module.css";
-
 const ListItem = (props) => {
   const { index, author, title, url, created_at, points, num_comments } = props;
   return (

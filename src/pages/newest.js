@@ -4,61 +4,30 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "@/styles/newest.module.css";
 
+// Utils
+import getTimeDifference from "@/utils/getTimeDifference";
+import getDomain from "@/utils/getDomain";
+
 //Components
 import ListItem from "@/components/ListItem";
 
-const newest = () => {
-  const getDomain = (url) => {
-    if (url == null) return;
-    const Url = new URL(url);
-    // console.log(Url.hostname);
-    return "(" + Url.hostname.toString() + ")";
-  };
-  function timeDifference(previous) {
-    const current = Date.now();
-    const date = new Date(previous);
-
-    // console.log(current, date.getTime());
-    var msPerMinute = 60 * 1000;
-    var msPerHour = msPerMinute * 60;
-    var msPerDay = msPerHour * 24;
-    var msPerMonth = msPerDay * 30;
-    var msPerYear = msPerDay * 365;
-
-    var elapsed = current - date.getTime();
-
-    if (elapsed < msPerMinute) {
-      return Math.round(elapsed / 1000) + " seconds ago";
-    } else if (elapsed < msPerHour) {
-      return Math.round(elapsed / msPerMinute) + " minutes ago";
-    } else if (elapsed < msPerDay) {
-      return Math.round(elapsed / msPerHour) + " hours ago";
-    } else if (elapsed < msPerMonth) {
-      return "approximately " + Math.round(elapsed / msPerDay) + " days ago";
-    } else if (elapsed < msPerYear) {
-      return (
-        "approximately " + Math.round(elapsed / msPerMonth) + " months ago"
-      );
-    } else {
-      return "approximately " + Math.round(elapsed / msPerYear) + " years ago";
-    }
-  }
+const Newest = () => {
   const [newsData, setNewsData] = useState([]);
   const [page, setPage] = useState(0);
-  const getNews = async () => {
-    const data = await axios.get(
-      `http://hn.algolia.com/api/v1/search_by_date?page=${page}&tags=story`
-    );
-    console.log(data.data.hits);
-    setNewsData(data.data.hits);
-  };
 
   useEffect(() => {
+    const getNews = async () => {
+      const data = await axios.get(
+        `http://hn.algolia.com/api/v1/search_by_date?page=${page}&tags=story`
+      );
+      setNewsData(data.data.hits);
+    };
+
     getNews();
   }, [page]);
 
   return (
-    <div className="py-10 px-5">
+    <div className="" style={{ backgroundColor: "#F6F6EF" }}>
       <div className={styles.head}>
         <div className={`flex py-2 flex items-center`}>
           <div className="flex mr-10">
@@ -106,30 +75,30 @@ const newest = () => {
               author={item.author}
               title={item.title}
               url={getDomain(item.url)}
-              created_at={timeDifference(item.created_at)}
+              created_at={getTimeDifference(item.created_at)}
               points={item.points}
               num_comments={item.num_comments}
             />
           );
         })}
         <a
-          className="pl-10 text-2xl cursor-pointer"
+          className="pl-10 text-2xl cursor-pointer hover:text-blue-500"
           onClick={() => setPage(page + 1)}
         >
           More
         </a>
       </div>
       <hr style={{ borderColor: "orange", borderWidth: 2 }} />
-      <footer className="p-5 text-xl">
-        <div className="flex justify-center">
-          <a className={styles.footer_link}>Guidelines</a> |
-          <a className={styles.footer_link}> FAQ</a> |
-          <a className={styles.footer_link}> Lists</a> |
-          <a className={styles.footer_link}> API</a> |
-          <a className={styles.footer_link}> Security</a> |
-          <a className={styles.footer_link}> Legal</a> |
-          <a className={styles.footer_link}> Apply to YC</a> |{" "}
-          <a className={styles.footer_link}>Contact</a>
+      <footer className="flex flex-col w-full items-center py-5 text-xl bg-white">
+        <div className="flex justify-evenly items-center w-full md:w-4/5">
+          <a className="text-sm lg:text-lg">Guidelines</a> |
+          <a className="text-sm lg:text-lg"> FAQ</a> |
+          <a className="text-sm lg:text-lg"> Lists</a> |
+          <a className="text-sm lg:text-lg"> API</a> |
+          <a className="text-sm lg:text-lg"> Security</a> |
+          <a className="text-sm lg:text-lg"> Legal</a> |
+          <a className="text-sm lg:text-lg"> Apply to YC</a> |{" "}
+          <a className="text-sm lg:text-lg">Contact</a>
         </div>
         <div className="flex justify-center py-5">
           Search:
@@ -143,4 +112,4 @@ const newest = () => {
   );
 };
 
-export default newest;
+export default Newest;
