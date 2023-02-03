@@ -13,7 +13,7 @@ const Search = () => {
   const [searchBy, setSearchBy] = useState("popularity");
   const [searchFor, setSearchFor] = useState("0");
   const [page, setPage] = useState(0);
-  const [url, setUrl] = useState(`http://hn.algolia.com/api/v1/search`);
+  const [url, setUrl] = useState(`https://hn.algolia.com/api/v1/search`);
   const [data, setData] = useState([]);
 
   useEffect(() => {
