@@ -1,5 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
+import Link from "next/link";
+import Search from "./search";
 
 export default function Home() {
   return (
@@ -11,8 +13,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <a href="/search"> Go to search</a>
-        <a href="/newest"> Go to newest</a>
+        <Link href="/search">Go to search</Link>
+        <Link href="/newest"> Go to newest</Link>
       </main>
     </>
   );
